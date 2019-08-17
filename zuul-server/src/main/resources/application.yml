@@ -1,0 +1,30 @@
+server:
+   port: 7300
+  
+spring:
+   application:
+      name: springcloud-zuul-server
+   zipkin:
+       base-url: http://127.0.0.1:9411/
+       sender:
+          type: web
+       sleuth:
+          sampler:
+             percentage: 1.0
+             probability: 1    
+eureka:
+   client:
+      service-url:
+         defaultZone: http://localhost:7000/eureka/
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    
+zuul:
+   routes:
+      springcloud-eureka-producer:
+         path: /sp/**
+         serviceId: springcloud-eureka-producer
+      springcloud-eureka-consumer:
+         path: /sc/**
+         serviceId: springcloud-eureka-consumer

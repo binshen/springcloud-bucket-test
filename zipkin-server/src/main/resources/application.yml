@@ -1,0 +1,21 @@
+# http://localhost:18210/zipkin/
+server:
+   address: 127.0.0.1
+   port: 7400
+   
+management:
+   metrics:
+      web:
+         server:
+            auto-time-requests: false
+zipkin:
+   collector:
+      rabbitmq:
+         addresses: 127.0.0.1:5672
+         password: guest
+         username: guest
+         queue: zipkin
+
+spring:
+   application:
+      name: springboot-zipkin-server-stream #ServiceId, 配置服务命名，不区分大小写，在注册中心管理界面默认大写显示

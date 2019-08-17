@@ -1,0 +1,20 @@
+server:
+   port: 7200
+  
+spring:
+   application:
+      name: springcloud-eureka-consumer
+
+eureka:
+   client:
+      serviceUrl:
+         defaultZone: http://localhost:7000/eureka/
+      register-with-eureka: true
+      fetch-registry: true
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.cloud.client.ip-address}:${server.port}
+      
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug
